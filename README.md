@@ -33,17 +33,17 @@ Obtaining these components will require access to EV circuits and epoxid. This i
 5. Place the robot down on the OC Charger which can also be powered directly by GT cables
 6. Insert the OpenOS in the floppy disk slot of the robot and press the power button
 7. Follow the commands on the screen "install" --> "Y" --> "Y" (Note: The OpenOS disk is no longer needed in the robot afterwards)
-8. Download the script
+8. Download the script (middle click to paste)
 
-    wget https://raw.githubusercontent.com/DylanTaylor1/ic2-crop-automation/main/install.lua
+        wget https://raw.githubusercontent.com/DylanTaylor1/ic2-crop-automation/main/install.lua
 
 9. Install the script
 
-    ./install
+        ./install
 
-10. To edit the config (not recommended) type
+10. To edit the config (not recommended) enter
 
-    edit config.lua
+        edit config.lua
 
 11. Place the Spade and Transvector Binder into the last and second to last slot, respectively. Crop sticks will go in the third slot, but it is not required to put them in yourself. See image below.
 
