@@ -67,13 +67,11 @@ local function restockStick(resume)
 end
 
 
-local function dumpInventory(resume)
+local function dumpInventory()
     local selectedSlot = robot.select()
-    if resume ~= false then
-        gps.save()
-    end
     gps.go(config.storagePos)
-    for i=1, robot.inventorySize()+config.storageStopSlot do
+    
+    for i=1, robot.inventorySize() - 3 do
         if robot.count(i) > 0 then
             robot.select(i)
             for e=1, inventory_controller.getInventorySize(sides.down) do
@@ -84,18 +82,13 @@ local function dumpInventory(resume)
             end
         end
     end
-    if resume ~= false then
-        gps.resume()
-    end
     robot.select(selectedSlot)
 end
 
 
 local function restockAll()
     gps.save()
-    if config.KeepDrops then
-        dumpInventory()
-    end
+    dumpInventory()
     restockStick(false)
     charge(false)
     gps.resume()
@@ -207,6 +200,7 @@ local function transplantToMultifarm(src, dest)
     signal.pulseDown()
 
     if not (relayFarmlandPos[1] == globalDest[1] and relayFarmlandPos[2] == globalDest[2]) then
+
         -- transfer the crop to the destination
         robot.useDown(sides.down)
         gps.go(globalDest)
@@ -237,6 +231,7 @@ local function cleanup()
             robot.suckDown()
         end
     end
+
 end
 
 
@@ -244,6 +239,7 @@ return {
     needCharge = needCharge,
     charge = charge,
     restockStick = restockStick,
+    dumpInventory = dumpInventory,
     restockAll = restockAll,
     placeCropStick = placeCropStick,
     deweed = deweed,

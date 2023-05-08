@@ -106,6 +106,7 @@ local function statOnce()
         return true
     end
 
+    -- One Iteration
     for slot=1, config.farmArea, 1 do
         gps.go(posUtil.farmToGlobal(slot))
         local crop = scanner.scan()
@@ -138,14 +139,18 @@ local function init()
     action.restockAll()
 end
 
+
 local function main()
     init()
+
+    -- Loop
     while not statOnce() do
         gps.go({0,0})
         action.restockAll()
     end
-    gps.go({0,0})
 
+    -- Finish
+    gps.go({0,0})
     if #args == 0 then
         action.cleanup()
         gps.go({0,0})

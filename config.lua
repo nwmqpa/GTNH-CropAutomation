@@ -17,14 +17,12 @@ local config = {
     -- The coordinate for the transvector dislocator
     dislocatorPos = {0, 4},
 
-    -- The slot for spade, count from 0, count from bottom-right to top-left
+    -- The slot for spade (Don't Change)
     spadeSlot = 0,
-    -- The slot for binder for the transvector dislocator
+    -- The slot for binder for the transvector dislocator (Don't Change)
     binderSlot = -1,
-    -- The slot for crop sticks
+    -- The slot for crop sticks (Don't Change)
     stickSlot = -2,
-    -- To which slot should the robot stop storing items
-    storageStopSlot = -3,
 
     -- Utilize Storage Chest (Don't Change)
     keepDrops = true,

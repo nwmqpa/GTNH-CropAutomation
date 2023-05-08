@@ -9,6 +9,7 @@ local lowestTier
 local lowestTierSlot
 local lowestStat
 local lowestStatSlot
+local breedRound
 
 -- ==================== HANDLING TIERS ======================
 
@@ -125,6 +126,20 @@ end
 -- =================== TIERING ======================
 
 local function tierOnce()
+
+    -- Terminal Conditions
+    breedRound = breedRound + 1;
+    if (config.maxBreedRound and breedRound > config.maxBreedRound) then
+        print('Max round reached!')
+        return true
+    end
+
+    if #database.getStorage() >= 80 then
+        print('Storage full!')
+        return true
+    end
+
+    -- One Iteration
     for slot=1, config.farmArea, 1 do
         gps.go(posUtil.farmToGlobal(slot))
         local crop = scanner.scan()
@@ -134,11 +149,12 @@ local function tierOnce()
         else
             checkParent(slot, crop);
         end
-        
+  
         if action.needCharge() then
             action.charge()
         end
     end
+    return false
 end
 
 -- ====================== MAIN ======================
@@ -149,29 +165,21 @@ local function init()
     database.scanStorage()
     updateLowest()
     action.restockAll()
+    breedRound = 0
 end
 
 
 local function main()
     init()
-    local breedRound = 0;
-    while true do
-        tierOnce();
-        gps.go({0,0});
-        action.restockAll();
-        
-        breedRound = breedRound + 1;
-        if (config.maxBreedRound and breedRound > config.maxBreedRound) then
-            print('Max round reached!');
-            break;
-        end
-        
-        if #database.getStorage() >= config.storageFarmArea then
-            print('Storage full!');
-            break;
-        end
+
+    -- Loop
+    while not tierOnce() do
+        gps.go({0,0})
+        action.restockAll()
     end
 
+    -- Finish
+    gps.go({0,0})
     if #args == 0 then
         action.cleanup()
         gps.go({0,0})

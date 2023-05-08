@@ -63,20 +63,21 @@ end
 local function spreadOnce()
 
     -- Terminal Condition
-    if #database.getStorage() >= 81 then
+    if #database.getStorage() >= 80 then
         return true
     end
 
+    -- One Iteration
     for slot=1, config.farmArea, 1 do
         gps.go(posUtil.farmToGlobal(slot))
         local crop = scanner.scan()
-        
+
         if (slot % 2 == 0) then
             checkChildren(slot, crop)
         else
             checkParent(slot, crop)
         end
-    
+
         if action.needCharge() then
             action.charge()
         end
@@ -88,7 +89,7 @@ end
 
 local function init()
     database.resetStorage()
-    
+
     database.scanFarm()
     if config.keepMutations then
         database.scanStorage()
@@ -100,14 +101,18 @@ local function init()
     action.restockAll();
 end
 
+
 local function main()
     init()
+
+    -- Loop
     while not spreadOnce() do
         gps.go({0, 0})
         action.restockAll()
     end
-    gps.go({0,0})
 
+    -- Finish
+    gps.go({0,0})
     if #args == 0 then
         action.cleanup()
         gps.go({0,0})
