@@ -71,7 +71,7 @@ end
 
 local function dumpInventory(resume)
 
-    print(string('FLAG 1'))
+    print(string.format('FLAG 1: %s.', resume))
 
     local selectedSlot = robot.select()
     if resume ~= false then
@@ -80,15 +80,15 @@ local function dumpInventory(resume)
 
     gps.go(config.storagePos)
     for i=1, (robot.inventorySize() + config.storageStopSlot) do
-        print(string('FLAG 2'))
+        print(string.format('FLAG 2: %s.', robot.inventorySize()))
         if robot.count(i) > 0 then
-            print(string('FLAG 3'))
+            print(string.format('FLAG 3: %s.', robot.count(i)))
             robot.select(i)
             for e=1, inventory_controller.getInventorySize(sides.down) do
-                print(string('FLAG 4'))
+                print(string.format('FLAG 4: %s.', inventory_controller.getInventorySize(sides.down)))
                 if inventory_controller.getStackInSlot(sides.down, e) == nil then
                     inventory_controller.dropIntoSlot(sides.down, e)
-                    print(string('FLAG 5'))
+                    print(string.format('FLAG 5: %s.', inventory_controller.getInventorySize(sides.down)))
                     break;
                 end
             end

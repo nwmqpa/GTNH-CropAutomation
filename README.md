@@ -85,7 +85,11 @@ To list all of the files installed on the robot
 
 To remove any file installed on the robot
 
-    rm config.lua
+    rm <filename>
+
+To uninstall all files from this repo, enter
+
+    uninstall
 
 To run without cleanup for some reason, type ANYTHING after the program name
 
