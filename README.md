@@ -1,8 +1,8 @@
-## Introduction
+# Introduction
 
 This Open computers (OC) Script will automatically tier up, stat up, and spread (duplicate) crops for you. Open Computers is a very powerful yet complicated mod using custom scripts written in lua, but fear not. I have made everything here as straight forward as possible to help you get your crop bot running in no time.
 
-## Bare Minimum Components
+# Bare Minimum Components
 
 Obtaining these components will require access to EV circuits and epoxid. This is because you need an internet card to pull the scripts from GitHub. Do not waste time trying to write it all yourself. The CPU and Graphics Card can be replaced by a single APU if you feel so inclined. Both inventory upgrades are necessary.
 
@@ -24,7 +24,7 @@ Obtaining these components will require access to EV circuits and epoxid. This i
 - Internet Card
 - OpenOS (Operating System)
 
-### Building the Robot
+# Building the Robot
 
 1. Insert Computer Case into the OC Electronics Assembler which can be powered directly by GT cables
 2. Shift-Click all of the Computer Parts into the Computer Case except the OpenOS
@@ -49,9 +49,9 @@ Obtaining these components will require access to EV circuits and epoxid. This i
 
 ![robot inventory](media/Robot_Inventory.png)
 
-### Building the Farms
+# Building the Farms
 
-First off, it is recommended to set everything up in a Jungle or Swamp biome at Y=130 as that will give you the highest humidity and air quality stats. This is most easily done in a personal dimension which you earn as a quest reward from reaching the moon. Do not place any solid blocks above the farm as that will reduce the air quality. All of the machines are waterproof (except for power which should be underneath the farm anyway) so do not worry about the rain. The whole farm will fit into a single chunk for easy chunk loading. See image below.
+First off, it is recommended to set everything up in a Jungle or Swamp biome at Y=130 as that will give you the highest humidity and air quality stats. This is most easily done in a personal dimension which you earn as a quest reward from reaching the moon. Do not place any solid blocks above the farm as that will reduce the air quality. All of the machines are waterproof (except for power which should be underneath the farm anyway) so do not worry about the rain. Use fertilized dirt or garden soil because they do not require a nearby water source. The whole farm will fit into a single chunk for easy chunk loading. See image below.
 
 ![setup for crossbreeding](media/Farm_Layout.png)
 
@@ -59,7 +59,7 @@ First note the orientation of the robot sitting atop the OC charger. It must fac
 
 The starting crops must be placed manually and in the checkerboard pattern seen in the photo. This goes for all three programs.
 
-### Running the Programs
+# Running the Programs
 
 The first program is autoTier. This will automatically tier up your crops, terminating once the max breeding round is reached (configurable) or the storge farm is full. A storage chest is recommended for this program. Note that some crops will be moved to the storage farm along the way and statting-up the crops while tiering up is an option in the config. To run, simply enter:
 
