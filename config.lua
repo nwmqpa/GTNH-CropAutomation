@@ -23,6 +23,8 @@ local config = {
     binderSlot = -1,
     -- The slot for crop sticks (Don't Change)
     stickSlot = -2,
+    -- The slot which the robot will stop storing items
+    storageStopSlot = -3,
 
     -- Utilize Storage Chest (Don't Change)
     keepDrops = true,

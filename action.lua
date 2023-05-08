@@ -52,6 +52,7 @@ local function restockStick(resume)
     if resume ~= false then
         gps.save()
     end
+
     gps.go(config.stickContainerPos)
     robot.select(robot.inventorySize()+config.stickSlot)
     for i=1, inventory_controller.getInventorySize(sides.down) do
@@ -60,6 +61,7 @@ local function restockStick(resume)
             break
         end
     end
+
     if resume ~= false then
         gps.resume()
     end
@@ -67,20 +69,34 @@ local function restockStick(resume)
 end
 
 
-local function dumpInventory()
+local function dumpInventory(resume)
+
+    print(string('FLAG 1'))
+
     local selectedSlot = robot.select()
+    if resume ~= false then
+        gps.save()
+    end
+
     gps.go(config.storagePos)
-    
-    for i=1, robot.inventorySize() - 3 do
+    for i=1, (robot.inventorySize() + config.storageStopSlot) do
+        print(string('FLAG 2'))
         if robot.count(i) > 0 then
+            print(string('FLAG 3'))
             robot.select(i)
             for e=1, inventory_controller.getInventorySize(sides.down) do
+                print(string('FLAG 4'))
                 if inventory_controller.getStackInSlot(sides.down, e) == nil then
                     inventory_controller.dropIntoSlot(sides.down, e)
+                    print(string('FLAG 5'))
                     break;
                 end
             end
         end
+    end
+
+    if resume ~= false then
+        gps.resume()
     end
     robot.select(selectedSlot)
 end
@@ -88,7 +104,7 @@ end
 
 local function restockAll()
     gps.save()
-    dumpInventory()
+    dumpInventory(false)
     restockStick(false)
     charge(false)
     gps.resume()

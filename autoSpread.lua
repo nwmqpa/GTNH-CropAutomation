@@ -96,7 +96,7 @@ local function init()
     end
 
     targetCrop = database.getFarm()[1].name;
-    print(string.format('Target crop recognized: %s.', targetCrop));
+    print(string.format('Target crop recognized: %s.', targetCrop))
 
     action.restockAll();
 end
@@ -108,7 +108,7 @@ local function main()
     -- Loop
     while not spreadOnce() do
         gps.go({0, 0})
-        action.restockAll()
+        action.restockAll();
     end
 
     -- Finish

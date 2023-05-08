@@ -133,7 +133,7 @@ local function init()
     end
 
     targetCrop = database.getFarm()[1].name;
-    print(string.format('Target crop recognized: %s.', targetCrop));
+    print(string.format('Target crop recognized: %s.', targetCrop))
 
     updateLowest()
     action.restockAll()

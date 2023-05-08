@@ -145,9 +145,9 @@ local function tierOnce()
         local crop = scanner.scan()
 
         if (slot % 2 == 0) then
-            checkOffspring(slot, crop);
+            checkOffspring(slot, crop)
         else
-            checkParent(slot, crop);
+            checkParent(slot, crop)
         end
   
         if action.needCharge() then
