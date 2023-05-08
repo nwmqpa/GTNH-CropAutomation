@@ -126,21 +126,22 @@ end
 -- =================== TIERING ======================
 
 local function tierOnce()
-
-    -- Terminal Conditions
-    breedRound = breedRound + 1;
-    if (config.maxBreedRound and breedRound > config.maxBreedRound) then
-        print('Max round reached!')
-        return true
-    end
-
-    if #database.getStorage() >= 80 then
-        print('Storage full!')
-        return true
-    end
-
-    -- One Iteration
     for slot=1, config.farmArea, 1 do
+
+        -- Terminal Condition
+        breedRound = breedRound + 1;
+        if (config.maxBreedRound and breedRound > config.maxBreedRound) then
+            print('Max round reached!')
+            return true
+        end
+
+        -- Terminal Condition
+        if #database.getStorage() >= 80 then
+            print('Storage full!')
+            return true
+        end
+
+        -- Scan
         gps.go(posUtil.farmToGlobal(slot))
         local crop = scanner.scan()
 

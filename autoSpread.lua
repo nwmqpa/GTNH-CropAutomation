@@ -62,13 +62,14 @@ end
 
 local function spreadOnce()
 
-    -- Terminal Condition
-    if #database.getStorage() >= 80 then
-        return true
-    end
-
-    -- One Iteration
     for slot=1, config.farmArea, 1 do
+
+        -- Terminal Condition
+        if #database.getStorage() >= 81 then
+            return true
+        end
+
+        -- Scan
         gps.go(posUtil.farmToGlobal(slot))
         local crop = scanner.scan()
 
