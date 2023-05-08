@@ -40,7 +40,7 @@ if args[2] ~= nil then
 end
 
 
-local repo = args[3] or "https://raw.githubusercontent.com/DylanTaylor1/ic2-crop-automation/main/install.lua";
+local repo = args[3] or "https://raw.githubusercontent.com/DylanTaylor1/ic2-crop-automation/";
 
 
 for i=1, #scripts do
