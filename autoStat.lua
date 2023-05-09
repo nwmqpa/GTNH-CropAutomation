@@ -6,9 +6,9 @@ local scanner = require("scanner")
 local posUtil = require("posUtil")
 local config = require("config")
 local args = {...}
-local lowestStat;
-local lowestStatSlot;
-local targetCrop;
+local lowestStat
+local lowestStatSlot
+local targetCrop
 
 -- ==================== HANDLING STATS ======================
 
@@ -22,7 +22,7 @@ local function updateLowest()
         if crop ~= nil then
             if crop.name == 'crop' then
                 lowestStatSlot = slot
-                break;
+                break
             else
                 local stat = crop.gr + crop.ga - crop.re
                 if stat < lowestStat then
@@ -46,10 +46,10 @@ end
 -- ====================== SCANNING ======================
 
 local function isWeed(crop)
-    return crop.name == "weed" or 
+    return crop.name == "weed" or
         crop.name == "Grass" or
-        crop.gr > 21 or 
-        (crop.name == "venomilia" and crop.gr > 7);
+        crop.gr > 21 or
+        (crop.name == "venomilia" and crop.gr > 7)
 end
 
 
@@ -93,34 +93,36 @@ end
 local function checkParent(slot, crop)
     if crop.name == "air" then
         robot.swingDown()
-    end
+        database.updateFarm(slot, nil)
+        updateLowest()
 
-    if crop.isCrop and isWeed(crop) then
-        action.deweed();
-        database.updateFarm(slot, {name='crop'});
-        updateLowest();
+    elseif crop.isCrop and isWeed(crop) then
+        action.deweed()
+        database.updateFarm(slot, nil)
+        updateLowest()
     end
 end
 
 -- ====================== STATTING ======================
 
 local function statOnce()
-
-    -- Terminal Condition
-    if lowestStat == config.autoStatThreshold then
-        action.restockAll()
-        return true
-    end
-
-    -- Scan
     for slot=1, config.farmArea, 1 do
+
+        -- Terminal Condition
+        if lowestStat == config.autoStatThreshold then
+            action.restockAll()
+            print('Minimum stat threshold reached!')
+            return true
+        end
+
+        -- Scan
         gps.go(posUtil.farmToGlobal(slot))
         local crop = scanner.scan()
 
         if (slot % 2 == 0) then
-            checkChildren(slot, crop);
+            checkChildren(slot, crop)
         else
-            checkParent(slot, crop);
+            checkParent(slot, crop)
         end
         
         if action.needCharge() then
@@ -134,15 +136,11 @@ end
 
 local function init()
     database.scanFarm()
-    if config.keepMutations then
-        database.scanStorage()
-    end
-
-    targetCrop = database.getFarm()[1].name;
-    print(string.format('Target crop recognized: %s.', targetCrop))
-
+    database.scanStorage()
     updateLowest()
     action.restockAll()
+    targetCrop = database.getFarm()[1].name
+    print(string.format('Target crop recognized: %s.', targetCrop))
 end
 
 

@@ -20,29 +20,24 @@ local function updateLowest()
     lowestStat = 64
     lowestStatSlot = 0
     local farm = database.getFarm()
-    local hasEmptySlot = false;
 
     -- Find lowest tier slot.
     for slot=1, config.farmArea, 2 do
         local crop = farm[slot]
         if crop == nil then
-            lowestTierSlot = slot;
-            lowestStatSlot = slot;
-            hasEmptySlot = true;
-            break;
+            lowestTierSlot = slot
+            lowestStatSlot = slot
+            return
         end
-        
+    
         if crop.tier < lowestTier then
             lowestTier = crop.tier
             lowestTierSlot = slot
         end
     end
 
-    if hasEmptySlot then
-        return;
-    end
 
-    -- Find lowest stats slot among the lowest tier crops.
+    -- Find lowest stats slot amongst the lowest tier crops
     if config.statwhileTiering then
         for slot=1, config.farmArea, 2 do
             local crop = farm[slot]
@@ -79,7 +74,7 @@ local function isWeed(crop)
     return crop.name == "weed" or 
         crop.name == "Grass" or
         crop.gr > 21 or 
-        (crop.name == "venomilia" and crop.gr > 7);
+        (crop.name == "venomilia" and crop.gr > 7)
 end
 
 
@@ -120,11 +115,13 @@ end
 local function checkParent(slot, crop)
     if crop.name == "air" then
         robot.swingDown()
-    end
+        database.updateFarm(slot, nil)
+        updateLowest()
 
-    if crop.isCrop and isWeed(crop) then
-        action.deweed();
-        database.updateFarm(slot, nil);
+    elseif crop.isCrop and isWeed(crop) then
+        action.deweed()
+        database.updateFarm(slot, nil)
+        updateLowest()
     end
 end
 
@@ -134,7 +131,7 @@ local function tierOnce()
     for slot=1, config.farmArea, 1 do
 
         -- Terminal Condition
-        breedRound = breedRound + 1;
+        breedRound = breedRound + 1
         if (config.maxBreedRound and breedRound > config.maxBreedRound) then
             print('Max round reached!')
             action.restockAll()
