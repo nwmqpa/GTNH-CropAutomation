@@ -1,3 +1,4 @@
+local robot = require("robot")
 local gps = require("gps")
 local action = require("action")
 local database = require("database")
@@ -82,7 +83,7 @@ local function isWeed(crop)
 end
 
 
-local function checkOffspring(slot, crop)
+local function checkChildren(slot, crop)
     if crop.name == "air" then
         action.placeCropStick(2)
 
@@ -117,6 +118,10 @@ end
 
 
 local function checkParent(slot, crop)
+    if crop.name == "air" then
+        robot.swingDown()
+    end
+
     if crop.isCrop and isWeed(crop) then
         action.deweed();
         database.updateFarm(slot, nil);
@@ -132,12 +137,14 @@ local function tierOnce()
         breedRound = breedRound + 1;
         if (config.maxBreedRound and breedRound > config.maxBreedRound) then
             print('Max round reached!')
+            action.restockAll()
             return true
         end
 
         -- Terminal Condition
         if #database.getStorage() >= 80 then
             print('Storage full!')
+            action.restockAll()
             return true
         end
 
@@ -146,7 +153,7 @@ local function tierOnce()
         local crop = scanner.scan()
 
         if (slot % 2 == 0) then
-            checkOffspring(slot, crop)
+            checkChildren(slot, crop)
         else
             checkParent(slot, crop)
         end

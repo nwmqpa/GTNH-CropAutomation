@@ -109,4 +109,5 @@ If you are familiar with the older versions of this code (particularly what is c
 - It is no longer necessary to break the robot after the storage farm is full in order to run autoSpread again.
 - All of the programs run on the same farm layout to facilitate running autoSpread immediately after autoStat.
 - Additional functionality such as changing the threshold for autoSpread and autoStat directly from the config and whether or not to stat-up crops while running autoTier.
+- Brand new uninstall script
 - Code is generally cleaner and more organized with a lot of fluff removed.

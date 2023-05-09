@@ -1,3 +1,4 @@
+local robot = require("robot")
 local database = require("database")
 local gps = require("gps")
 local posUtil = require("posUtil")
@@ -52,6 +53,10 @@ end
 
 
 local function checkParent(slot, crop)
+    if crop.name == "air" then
+        robot.swingDown()
+    end
+
     if crop.isCrop and isWeed(crop) then
         action.deweed();
         database.updateFarm(slot, nil);

@@ -1,3 +1,4 @@
+local robot = require("robot")
 local gps = require("gps")
 local action = require("action")
 local database = require("database")
@@ -90,6 +91,10 @@ end
 
 
 local function checkParent(slot, crop)
+    if crop.name == "air" then
+        robot.swingDown()
+    end
+
     if crop.isCrop and isWeed(crop) then
         action.deweed();
         database.updateFarm(slot, {name='crop'});
@@ -103,10 +108,11 @@ local function statOnce()
 
     -- Terminal Condition
     if lowestStat == config.autoStatThreshold then
+        action.restockAll()
         return true
     end
 
-    -- One Iteration
+    -- Scan
     for slot=1, config.farmArea, 1 do
         gps.go(posUtil.farmToGlobal(slot))
         local crop = scanner.scan()
