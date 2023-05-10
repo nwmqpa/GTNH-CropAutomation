@@ -1,10 +1,10 @@
 # Introduction
 
-This Open computers (OC) Script will automatically tier up, stat up, and spread (duplicate) crops for you. Open Computers is a very powerful yet complicated mod using custom scripts written in lua, but fear not. I have made everything here as straight forward as possible to help you get your crop bot running in no time.
+This Open computers (OC) Script will automatically tier up, stat up, and spread (duplicate) crops for you. Open Computers is a very powerful yet complicated mod using custom scripts written in lua, but fear not. I have made everything here as straight forward as possible to help you get your crop bot running in no time. (NOTE: The Geolyzer was broken upon the release of version 2.1.2.1, this script will not work until switching to a older or more recent version)
 
 # Bare Minimum Components
 
-Obtaining these components will require access to EV circuits and epoxid. This is because you need an internet card to pull the scripts from GitHub. Do not waste time trying to write it all yourself. The CPU and Graphics Card can be replaced by a single APU if you feel so inclined. Both inventory upgrades are necessary.
+Obtaining these components will require access to EV circuits and epoxid (late HV). This is because you need an internet card to pull the scripts from GitHub. Do not waste time trying to write it all yourself. The CPU and Graphics Card can be replaced by a single APU if you feel so inclined. Both inventory upgrades are necessary.
 
 - OC Electronics Assembler
 - OC Charger
@@ -23,6 +23,8 @@ Obtaining these components will require access to EV circuits and epoxid. This i
 - Disk Drive
 - Internet Card
 - OpenOS (Operating System)
+
+You will also need a Transvector Binder and Transvector Dislocator which requires some progression in Thaumcraft. However, it is not too deep and completely doable if you are already able to make EV circuits and epoxid. Transvector Dislocator can be found under "Thaumic Tinkerer" and requires the following prerequisites on the same tab: Transvector Interface and Smokey Quartz. You will also need to complete research on Mirror Magic under "Artifice." For more information, visit the Thaumcraft Research Cheatsheet at https://gtnh.miraheze.org/wiki/Thaumcraft_Research_Cheatsheet.
 
 # Building the Robot
 
@@ -55,13 +57,13 @@ First off, it is recommended to set everything up in a Jungle or Swamp biome at 
 
 ![setup for crossbreeding](media/Farm_Layout.png)
 
-First note the orientation of the robot sitting atop the OC charger. It must face up towards the crop stick chest. If the crop stick chest is ever empty, the robot will run into errors and the script will break. In the image, I have a trash can on the other side of the crop stick chest because I currently do not want any drops beyond the target crop, but this can be replaced with another chest if need be. The blank fertilized dirt is for the transvector dislocator which should be facing it. You can tell which direction the transvector dislocator is facing by the side that is animated. The last spot is for a crop-matron which is optional and one y-level lower than the rest of the blocks. It is just to hydrate most of the crops so everything runs a little faster.
+First note the orientation of the robot sitting atop the OC charger. It must face up towards the crop stick chest. If the crop stick chest is ever empty, the robot will run into errors and the script will crash. In the image, I have a trash can on the other side of the crop stick chest because I do not want any drops beyond the target crop, but this can be replaced with another chest if need be. The blank fertilized dirt is for the transvector dislocator which should be facing it. You can tell which direction the transvector dislocator is facing by the side that is animated. The last spot is for a crop-matron which is optional and one y-level lower than the rest of the blocks. It is just to hydrate most of the crops so everything runs a little faster.
 
-The starting crops must be placed manually in the checkerboard pattern seen in the photo. This layout goes for all three programs. If you cannot fill the entire checkerboard to start, the absolute minimum required is two (one as the target crop and the other next to it for crossbreeding). Do not place empty crop sticks to fill the rest of the checkerboard. The target crop is used by autoStat and autoSpread to identify the crop you want to stat-up or spread to the storage farm.
+The starting crops must be placed manually in the checkerboard pattern seen in the photo. This layout goes for all three programs. If you cannot fill the entire checkerboard to start, the absolute minimum required is two (one as the target crop and the other next to it for crossbreeding). It is not necessary to place empty crop sticks to fill the rest of the checkerboard. The target crop is used by autoStat and autoSpread to identify the crop you want to stat-up or spread to the storage farm.
 
 # Running the Programs
 
-The first program is autoTier. This will automatically tier up your crops, terminating once the max breeding round is reached (configurable) or the storge farm is full. A storage chest is recommended for this program. Note that unrecognized crops will be moved to the storage farm first before replacing any of the lower tier crops in the working farm. Statting-up the crops before increasing to the next tier is an option in the config. To run, simply enter:
+The first program is autoTier. This will automatically tier up your crops, terminating once the max breeding round is reached (configurable) or the storge farm is full. A storage chest is recommended for this program. Note that unrecognized crops will be moved to the storage farm first before replacing any of the lower tier crops in the working farm. Statting-up crops before increasing to the next tier is an option in the config. To run, simply enter:
 
     autoTier
 
@@ -91,22 +93,21 @@ To uninstall all of the files from this repo, enter
 
     uninstall
 
-To run without cleanup for some reason, type ANYTHING after the program name
+To run without cleanup for some reason, type ANYTHING after the program name. If left alone, this will leave your entire working farm susceptible to weeds.
 
     autoSpread nocleanup
 
 ## Thanks
 
-I DID NOT WRITE MOST OF THE CODE. My repo is a fork from https://github.com/huchenlei/auto-crossbreeding/tree/improve_autocrossbreed which was originally authored by huchenlei and improved by xyqyear. Huge props to them for getting this off the ground and allowing me to take it further.
+I DID NOT WRITE THE ORIGINAL CODE. My repo is a fork from https://github.com/huchenlei/auto-crossbreeding/tree/improve_autocrossbreed which was originally authored by huchenlei and improved by xyqyear. Huge props to them for getting this off the ground and allowing me to take it further.
 
 ## Notable Changes
 
-If you are familiar with the older versions of this code (particularly what is currently uploaded to the GTNH wiki) then here are some notable changes that motivated me to develop this fork in the first place.
+If you are familiar with the older versions of this code then here are some notable changes that motivated me to develop this fork in the first place.
 
 - Location of the Chests/Dislocator/Crop-Matron now make slightly more sense in my opinion.
 - "docleanup" is no longer a flag that needs to be raised. It will do this automatically unless ANY argument is given.
-- Running cleanup no longer crashes the robot on any of the programs.
-- Running autoStat followed by autoSpread no longer crashes the robot.
+- If setup correctly, the robot should theoretically never crash
 - It is no longer necessary to break the robot after the storage farm is full in order to run autoSpread or autoTier again.
 - All of the programs run on the same farm layout to facilitate running autoSpread immediately after autoStat.
 - Additional functionality such as changing the threshold for autoSpread and autoStat directly from the config and whether or not to stat-up crops while running autoTier.
