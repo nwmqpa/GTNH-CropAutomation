@@ -79,7 +79,7 @@ end
 local function checkParent(slot, crop)
     if crop.isCrop and scanner.isWeed(crop) then
         action.deweed()
-        database.updateFarm(slot, 'crop')
+        database.updateFarm(slot, nil)
         updateLowest()
     end
 end
