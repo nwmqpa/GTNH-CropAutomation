@@ -24,13 +24,22 @@ end
 
 -- ====================== SCANNING ======================
 
+local function isWeed(crop)
+    return crop.name == 'weed' or
+        crop.name == 'Grass' or
+        crop.gr > config.autoSpreadMaxGrowth or
+        crop.re > config.autoSpreadMaxResistance or
+        (crop.name == 'venomilia' and crop.gr > 7)
+end
+
+
 local function checkChild(slot, crop)
     if crop.isCrop and crop.name ~= 'emptyCrop' then
 
         if crop.name == 'air' then
             action.placeCropStick(2)
 
-        elseif scanner.isWeed(crop) then
+        elseif isWeed(crop) then
             action.deweed()
             action.placeCropStick()
 
@@ -39,7 +48,7 @@ local function checkChild(slot, crop)
             if stat >= config.autoSpreadThreshold then
 
                 -- Make sure no parent on the working farm is empty
-                if findEmpty() then
+                if findEmpty() and crop.gr <= config.autoStatMaxGrowth then
                     action.transplant(posUtil.workingSlotToPos(slot), posUtil.workingSlotToPos(emptySlot))
                     action.placeCropStick(2)
                     database.updateFarm(emptySlot, crop)
@@ -72,7 +81,7 @@ end
 
 local function checkParent(slot, crop)
     if crop.isCrop and crop.name ~= 'air' and crop.name ~= 'emptyCrop' then
-        if scanner.isWeed(crop) then
+        if isWeed(crop) then
             action.deweed()
             database.updateFarm(slot, {isCrop=true, name='emptyCrop'})
         end
