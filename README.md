@@ -1,6 +1,6 @@
 # Introduction
 
-These Open Computers (OC) scripts will automatically tier-up, stat-up, and spread (duplicate) crops for you. OC is a very powerful yet complicated mod using custom scripts, but fear not. I have made everything here as straightforward as possible to help you get your crop bot running in no time without any prior knowledge of OC.
+These Open Computers (OC) scripts will automatically tier-up, stat-up, and spread (duplicate) IC2 crops for you. OC is a very powerful yet complicated mod using custom scripts, but fear not. I have made everything here as straightforward as possible to help you get your crop bot running in no time without any prior knowledge of OC.
 
 # Bare Minimum Components
 
