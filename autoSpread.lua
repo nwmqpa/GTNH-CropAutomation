@@ -7,7 +7,7 @@ local config = require('config')
 local emptySlot
 local targetCrop
 
--- ================== HANDLING SPREAD ====================
+-- =================== MINOR FUNCTIONS ======================
 
 local function findEmpty()
     local farm = database.getFarm()
@@ -22,7 +22,6 @@ local function findEmpty()
     return false
 end
 
--- ====================== SCANNING ======================
 
 local function isWeed(crop)
     return crop.name == 'weed' or
@@ -39,7 +38,7 @@ local function checkChild(slot, crop)
         if crop.name == 'air' then
             action.placeCropStick(2)
 
-        elseif isWeed(crop) then
+        elseif scanner.isWeed(crop, 'storage') then
             action.deweed()
             action.placeCropStick()
 
@@ -81,14 +80,14 @@ end
 
 local function checkParent(slot, crop)
     if crop.isCrop and crop.name ~= 'air' and crop.name ~= 'emptyCrop' then
-        if isWeed(crop) then
+        if scanner.isWeed(crop, 'working') then
             action.deweed()
             database.updateFarm(slot, {isCrop=true, name='emptyCrop'})
         end
     end
 end
 
--- ====================== SPREADING ======================
+-- ====================== THE LOOP ======================
 
 local function spreadOnce()
     for slot=1, config.workingFarmArea, 1 do

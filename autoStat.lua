@@ -8,7 +8,7 @@ local lowestStat
 local lowestStatSlot
 local targetCrop
 
--- ==================== HANDLING STATS ======================
+-- =================== MINOR FUNCTIONS ======================
 
 local function updateLowest()
     local farm = database.getFarm()
@@ -43,16 +43,6 @@ local function updateLowest()
     end
 end
 
--- ====================== SCANNING ======================
-
-local function isWeed(crop)
-    return crop.name == 'weed' or
-        crop.name == 'Grass' or
-        crop.gr > config.workingMaxGrowth or
-        crop.re > config.workingMaxResistance or
-        (crop.name == 'venomilia' and crop.gr > 7)
-end
-
 
 local function checkChild(slot, crop)
     if crop.isCrop and crop.name ~= 'emptyCrop' then
@@ -60,7 +50,7 @@ local function checkChild(slot, crop)
         if crop.name == 'air' then
             action.placeCropStick(2)
 
-        elseif isWeed(crop) then
+        elseif scanner.isWeed(crop, 'working') then
             action.deweed()
             action.placeCropStick()
 
@@ -93,7 +83,7 @@ end
 
 local function checkParent(slot, crop)
     if crop.isCrop and crop.name ~= 'air' and crop.name ~= 'emptyCrop' then
-        if isWeed(crop) then
+        if scanner.isWeed(crop, 'working') then
             action.deweed()
             database.updateFarm(slot, {isCrop=true, name='emptyCrop'})
             updateLowest()
@@ -101,7 +91,7 @@ local function checkParent(slot, crop)
     end
 end
 
--- ====================== STATTING ======================
+-- ====================== THE LOOP ======================
 
 local function statOnce()
     for slot=1, config.workingFarmArea, 1 do

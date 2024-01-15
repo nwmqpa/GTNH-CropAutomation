@@ -165,9 +165,24 @@ end
 
 
 local function cleanUp()
-    for slot=2, config.workingFarmArea, 2 do
+    for slot=1, config.workingFarmArea, 1 do
+
+        -- Scan
         gps.go(posUtil.workingSlotToPos(slot))
-        robot.swingDown()
+        local crop = scanner.scan()
+
+        -- Remove all children and empty parents
+        if slot % 2 == 0 or crop.name == 'emptyCrop' then
+            robot.swingDown()
+
+        -- Remove bad parents
+        elseif crop.isCrop and crop.name ~= 'air' then
+            if scanner.isWeed(crop, 'working') then
+                robot.swingDown()
+            end
+        end
+
+        -- Pickup
         if config.KeepDrops then
             robot.suckDown()
         end
