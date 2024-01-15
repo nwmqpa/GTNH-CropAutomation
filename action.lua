@@ -153,7 +153,6 @@ local function transplant(src, dest)
     -- DESTROY ORIGINAL CROP
     inventory_controller.equip()
     gps.go(config.relayFarmlandPos)
-    deweed()
     robot.swingDown()
     if config.KeepDrops then
         robot.suckDown()
