@@ -23,15 +23,6 @@ local function findEmpty()
 end
 
 
-local function isWeed(crop)
-    return crop.name == 'weed' or
-        crop.name == 'Grass' or
-        crop.gr > config.storageMaxGrowth or
-        crop.re > config.storageMaxResistance or
-        (crop.name == 'venomilia' and crop.gr > 7)
-end
-
-
 local function checkChild(slot, crop)
     if crop.isCrop and crop.name ~= 'emptyCrop' then
 
