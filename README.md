@@ -29,22 +29,22 @@ Lastly, you need a Transvector Binder and Transvector Dislocator which requires 
 
 # Building the Robot
 
-1. Insert the computer case into the OC Electronics Assembler which can be powered directly by any GT cable.
-2. Shift-click all of the components into the computer case except the OpenOS floppy disk
-3. Click assemble and wait until it completes (~3 min).
-4. Rename the robot in an anvil.
-5. Place the robot on the OC Charger which can also be powered directly by any GT cable. The OC Charger must be activated using some form of redstone such as a lever.
-6. Insert the OpenOS floppy disk into the disk slot of the robot and press the power button
-7. Follow the commands on screen 'install' --> 'Y' --> 'Y' (Note: The OpenOS floppy disk is no longer needed in the robot afterwards)
-8. Install the required scripts by copying this line of code into the robot (middle-click to paste)
+1) Insert the computer case into the OC Electronics Assembler which can be powered directly by any GT cable.
+2) Shift-click all of the components into the computer case except the OpenOS floppy disk
+3) Click assemble and wait until it completes (~3 min).
+4) Rename the robot in an anvil.
+5) Place the robot on the OC Charger which can also be powered directly by any GT cable. The OC Charger must be activated using some form of redstone such as a lever.
+6) Insert the OpenOS floppy disk into the disk slot of the robot and press the power button
+7) Follow the commands on screen 'install' --> 'Y' --> 'Y' (Note: The OpenOS floppy disk is no longer needed in the robot afterwards)
+8) Install the required scripts by copying this line of code into the robot (middle-click to paste)
 
         wget https://raw.githubusercontent.com/DylanTaylor1/GTNH-CropAutomation/main/setup.lua && setup
 
-9. Edit the config (not recommended, but check it out) by entering:
+9) Edit the config (not recommended, but check it out) by entering:
 
         edit config.lua
 
-10. Place the Spade and Transvector Binder into the last and second to last slot of the robot, respectively. Crop sticks will go in the third, but it is not required to put them in yourself. An axe or mattock can also be placed into the tool slot of the robot to speed up destroying crops (optional). See image below.
+10) Place the Spade and Transvector Binder into the last and second to last slot of the robot, respectively. Crop sticks will go in the third, but it is not required to put them in yourself. An axe or mattock can also be placed into the tool slot of the robot to speed up destroying crops (optional). See image below.
 
 ![Robot Inventory](media/Robot_Inventory.png?)
 
@@ -89,6 +89,19 @@ Lastly, these programs can be chained. This may be helpful if you have brand new
     autoStat && autoSpread
 
 Changing anything in the config requires you to restart your robot.
+
+# Troubleshooting
+1) The Transvector Dislocator is randomly moved to somewhere on the working farm
+Solution: Cover your water sources. Otherwise the order of the transvector binder will get messed up and teleport the dislocator instead of a crop.
+
+2) The Robot is randomly moved to somewhere on the working farm
+Solution: Check the orientation of the transvector dislocator. This can only happen if the dislocator is facing up instead of forward.
+
+3) The Robot is destroying all of the crops that were manually placed
+Solution: Either the resistance or growth stats of the parent crops are too high. By default, anything above 2 resistance or 21 growth is treated like a weed and will be removed. These values, including the maximum stats of child crops, are all easily changed in the config.
+
+4) Crops are randomly dying OR the farms are being overrun with weeds OR there are single crop sticks where there should be double
+Solution: Possibly change location. Crops have minimum environmental stat requirements (nutrients, humidity, air quality) and going below this threshold will kill the crop and leave an empty crop stick behind that is susceptible to growing weeds and overtaking the farms.
 
 ## Other Helpful Commands
 
