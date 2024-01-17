@@ -88,9 +88,10 @@ Lastly, these programs can be chained. This may be helpful if you have brand new
 
     autoStat && autoSpread
 
-Changing anything in the config requires you to restart your robot.
+To pause the robot during any of these programs, just turn off the OC Charger. The robot will not resume until it is fully charged. Also, changing anything in the config requires you to restart your robot.
 
 # Troubleshooting
+
 1) The Transvector Dislocator is randomly moved to somewhere on the working farm
 
 _Solution: Cover your water sources. Otherwise the order of the transvector binder will get messed up and teleport the dislocator instead of a crop._
