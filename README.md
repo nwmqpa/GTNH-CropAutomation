@@ -91,17 +91,21 @@ Lastly, these programs can be chained. This may be helpful if you have brand new
 Changing anything in the config requires you to restart your robot.
 
 # Troubleshooting
-Issue 1) The Transvector Dislocator is randomly moved to somewhere on the working farm
-Solution: Cover your water sources. Otherwise the order of the transvector binder will get messed up and teleport the dislocator instead of a crop.
+1) The Transvector Dislocator is randomly moved to somewhere on the working farm
 
-Issue 2) The Robot is randomly moved to somewhere on the working farm
-Solution: Check the orientation of the transvector dislocator. This can only happen if the dislocator is facing up instead of forward.
+_Solution: Cover your water sources. Otherwise the order of the transvector binder will get messed up and teleport the dislocator instead of a crop._
 
-Issue 3) The Robot is destroying all of the crops that were manually placed
-Solution: Either the resistance or growth stats of the parent crops are too high. By default, anything above 2 resistance or 21 growth is treated like a weed and will be removed. These values, including the maximum stats of child crops, are all easily changed in the config.
+4) The Robot is randomly moved to somewhere on the working farm
 
-Issue 4) Crops are randomly dying OR the farms are being overrun with weeds OR there are single crop sticks where there should be double
-Solution: Possibly change location. Crops have minimum environmental stat requirements (nutrients, humidity, air quality) and going below this threshold will kill the crop and leave an empty crop stick behind that is susceptible to growing weeds and overtaking the farms.
+_Solution: Check the orientation of the transvector dislocator. This can only happen if the dislocator is facing up instead of forward._
+
+3) The Robot is destroying all of the crops that were manually placed
+
+_Solution: Either the resistance or growth stats of the parent crops are too high. By default, anything above 2 resistance or 21 growth is treated like a weed and will be removed. These values, including the maximum stats of child crops, are all easily changed in the config._
+
+4) Crops are randomly dying OR the farms are being overrun with weeds OR there are single crop sticks where there should be double
+
+_Solution: Possibly change location. Crops have minimum environmental stat requirements (nutrients, humidity, air quality) and going below this threshold will kill the crop and leave an empty crop stick behind that is susceptible to growing weeds and overtaking the farms._
 
 ## Other Helpful Commands
 
