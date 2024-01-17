@@ -4,14 +4,13 @@ These Open Computers (OC) scripts will automatically tier-up, stat-up, and sprea
 
 # Bare Minimum Components
 
-Obtaining these components will require access to EV circuits and epoxid (late HV). This is because you need an internet card to pull the scripts from GitHub (it is possible to create all the files manually and then copy and paste the code from GitHub, but that is not recommended). The CPU and Graphics Card can be replaced by a single APU if you feel so inclined. Both inventory upgrades are necessary.
+Obtaining these components will require access to EV circuits and epoxid (mid-late HV). It is possible to save some resources by not including the internet card, but that will require manually copying and pasting the code from GitHub which is NOT recommended for multiple reasons. Both inventory upgrades are necessary.
 
 - OC Electronics Assembler
 - OC Charger
-- Tier 3 Computer Case
-- Tier 2 Central Processing Unit
+- Tier 2 Computer Case
+- Tier 2 Accelerated Processing Unit
 - Tier 2 Memory
-- Tier 1 Graphics Card
 - Tier 1 Redstone Card
 - Tier 1 Hard Disk Drive
 - Tier 1 Screen
@@ -30,28 +29,28 @@ Lastly, you need a Transvector Binder and Transvector Dislocator which requires 
 
 # Building the Robot
 
-1. Insert the computer case into the OC Electronics Assembler which can be powered directly by any GT cable.
-2. Shift-click all of the components into the computer case except the OpenOS floppy disk
-3. Click assemble and wait until it completes (~3 min).
-4. Rename the robot in an anvil.
-5. Place the robot on the OC Charger which can also be powered directly by any GT cable. The OC Charger must be activated using some form of redstone such as a lever.
-6. Insert the OpenOS floppy disk into the disk slot of the robot and press the power button
-7. Follow the commands on screen "install" --> "Y" --> "Y" (Note: The OpenOS floppy disk is no longer needed in the robot afterwards)
-8. Install the required scripts by copying this line of code into the robot (middle-click to paste)
+1) Insert the computer case into the OC Electronics Assembler which can be powered directly by any GT cable.
+2) Shift-click all of the components into the computer case except the OpenOS floppy disk
+3) Click assemble and wait until it completes (~3 min).
+4) Rename the robot in an anvil.
+5) Place the robot on the OC Charger which can also be powered directly by any GT cable. The OC Charger must be activated using some form of redstone such as a lever.
+6) Insert the OpenOS floppy disk into the disk slot of the robot and press the power button
+7) Follow the commands on screen 'install' --> 'Y' --> 'Y' (Note: The OpenOS floppy disk is no longer needed in the robot afterwards)
+8) Install the required scripts by copying this line of code into the robot (middle-click to paste)
 
         wget https://raw.githubusercontent.com/DylanTaylor1/GTNH-CropAutomation/main/setup.lua && setup
 
-9. Edit the config (not recommended, but check it out) by entering:
+9) Edit the config (not recommended, but check it out) by entering:
 
         edit config.lua
 
-10. Place the Spade and Transvector Binder into the last and second to last slot of the robot, respectively. Crop sticks will go in the third, but it is not required to put them in yourself. An axe or mattock can also be placed into the tool slot of the robot to speed up destroying crops (optional). See image below.
+10) Place the Spade and Transvector Binder into the last and second to last slot of the robot, respectively. Crop sticks will go in the third, but it is not required to put them in yourself. An axe or mattock can also be placed into the tool slot of the robot to speed up destroying crops (optional). See image below.
 
 ![Robot Inventory](media/Robot_Inventory.png?)
 
 # Building the Farms
 
-First off, it is recommended to set everything up in a Jungle or Swamp biome at Y=130 as that will give you the highest humidity and air quality stats. This is most easily done in a personal dimension which you earn as a quest reward from reaching the moon. Do not place any solid blocks above the farm as that will reduce the air quality. All of the machines on the surface are waterproof so do not worry about the rain. Use vanilla dirt because that will allow you to grow crops that require a particular block underneath, and boost the nutrient stat of your crops. The whole farm can easily fit into a single chunk for easy chunk loading.
+Find a location with good environmental stats. It is recommended to set everything up in a Jungle or Swamp biome at Y=130 as that will give you the highest humidity and air quality stats. If not, crops run the risk of randomly dying and leaving the farms susceptible to weeds. This is most easily done in a personal dimension which you earn as a quest reward from reaching the moon. Do not place any solid blocks above the farm as that will reduce the air quality. All of the machines on the surface are waterproof so do not worry about the rain. Use vanilla dirt because that will allow you to grow crops that require a particular block underneath, and boost the nutrient stat of your crops. The whole farm can easily fit into a single chunk for easy chunk loading.
 
 You may change both the size of the working farm and the size of the storage farm in the config (default is 6x6 and 9x9, respectively). Larger working farm sizes will extend left and up while larger storage farm sizes will extend down and to the right (see image below). The top row of the working farm will always align with the top row of the storage farm. There is no maximum or minimum size for either farm and it does not matter if the lengths are even or odd. Note that larger storage farm sizes will leave your working farm more susceptible to weeds because the robot will have to travel further when transporting crops which means less time spent scanning the working farm. Also note that the maximum range for the transvector dislocator is 16 blocks. Changing anything in the config requires you to restart your robot.
 
@@ -59,9 +58,9 @@ You may change both the size of the working farm and the size of the storage far
 
 ![Farm Side](media/Farm_Side.png?)
 
-First note the orientation of the robot sitting atop the OC charger. It must face towards the right-most column of the working farm. The crop stick chest directly next to the charger can be a few things: any sort of chest, a JABBA barrel, or storage drawer (orientation does not matter). If the crop stick chest is ever empty, bad things will happen. In the image, I have a trash can on the other side of the crop stick chest because I do not want any drops beyond the target crop, but this can be a second chest if you do want random drops. The transvector dislocator sits facing the top of the blank farmland (where a crop would go). Think of this as a buffer between the working and storage farms. You can tell which direction the transvector dislocator is facing by the side that is animated. The last spot is for a crop-matron which is optional and one y-level lower than the rest of the blocks. It is just to hydrate most of the crops to help them grow a little faster.
+First note the orientation of the robot sitting atop the OC charger. It must face towards the right-most column of the working farm. The crop stick chest directly next to the charger can be a few things: any sort of chest, a JABBA barrel, or storage drawer (orientation does not matter). If the crop stick chest is ever empty, bad things will happen. Next to that is a trash can to delete any random drops that the robot picks up (weeds, seed bags, crop sticks, etc), but this can be swapped with a second chest if you would like to recycle some of the materials. The transvector dislocator sits facing the top of the blank farmland (where a crop would go). Think of this as a buffer between the working and storage farms. You can tell which direction the transvector dislocator is facing by the side that is animated. The last spot is for a crop-matron which is optional and one y-level lower than the rest of the blocks. It is just to hydrate most of the crops to help them grow a little faster.
 
-The location of the water is completely flexible: they do not have to be in the same locations as in the photo (underneath all five sea lantern slabs) and you can have as many as you would like on both the working farm and storage farm. However, there MUST be a block on top of each water and no two can be next to each other. The block can be literally anything, even a lily pad will work, so long as there is something. It is also possible to use garden soil or fertilized dirt and have absolutely no water on the farms at all, but this will sacrifice a few nutrient stats and bar you from growing crops that require a particular block underneath.
+The location of the water is completely flexible: they do not have to be in the same locations as in the photo (underneath all five sea lantern slabs) and you can have as many as you would like on both the working farm and storage farm. However, **there MUST be a block on top of each water** and no two can be next to each other. The block can be literally anything, even a lily pad will work, so long as there is something. It is also possible to use garden soil or fertilized dirt and have absolutely no water on the farms at all, but this will sacrifice a few nutrient stats and bar you from growing crops that require a particular block underneath.
 
 The starting crops must be placed manually in the checkerboard pattern seen in the photo. This layout goes for all three programs. If you cannot fill the entire checkerboard to start, the absolute minimum required is two (one as the target crop and the other next to it for crossbreeding). Even worse, if you have just a single seed of your target crop, it is possible to start with a different crop next to it for crossbreeding (ie. Stickreed). It is not necessary to place empty crop sticks to fill the rest of the checkerboard. The target crop is used by autoStat and autoSpread to identify the crop you want to stat-up or spread to the storage farm, respectively.
 
@@ -73,23 +72,40 @@ For power, I am using an HV gas turbine and a super tank with some benzene (no t
 
 # Running the Programs
 
-The first program is autoTier. This will automatically tier-up your crops, terminating once the max breeding round is reached (configurable) or the storage farm is full. A storage chest is recommended for this program. Note that unrecognized crops will be moved to the storage farm first before replacing any of the lower tier crops in the working farm. Statting-up crops during this program is also a configurable option. To run, simply enter:
+The first program **autoTier** will automatically tier-up your crops until the max breeding round is reached (configurable), the storage farm is full, or ALL crops meet the specified tier threshold (default is 13). Note that unrecognized crops will be moved to the storage farm first before replacing any of the lower tier crops in the working farm. Statting-up crops during this program is also a configurable option, but it will slow down the process significantly. To run, simply enter:
 
     autoTier
 
-The second program is autoStat. This will automatically stat-up your target crop, terminating once Gr + Ga - Re is at least 52 (configurable) for all crops on the working farm. A trash can is recommended for this program. Maximum growth and resistance for parent crops are also configurable parameters which default to 21 and 2, respectively. To run, simply enter:
+The second program **autoStat** will automatically stat-up your target crop until the Gr + Ga - Re is at least 52 (configurable) for ALL crops on the working farm. Note that the maximum growth and resistance stats for parent crops are also configurable parameters (default is 21 and 2, respectively). Any crops with stats higher than these will be interpreted as weeds and removed. To run, simply enter:
 
     autoStat
 
-The third program is autoSpread. This will automatically spread (duplicate) your target crop if each new Gr + Ga - Re is at least 50 (configurable), terminating once the storage farm is full. A trash can is recommended for this program. Maximum growth and resistance for new (child) crops are also configurable parameters which default to 23 and 2, respectively. To run, simply enter:
+The third program **autoSpread** will automatically spread (duplicate) your target crop until the storage farm is full. New crops will only be accepted if their Gr + Ga - Re is at least 50 (configurable). Note that the maximum growth and resistance stats for child crops are also configurable parameters (default is 23 and 2, respectively). To run, simply enter:
 
     autoSpread
 
-Fire and Forget. If you have brand new crops (ie. 1/1/1 spruce saplings) and want to automatically stat-up and start spreading. Note that keepMutations in the config should probably be set to false (default), otherwise the storage farm will be overwritten once autoSpread begins. To run, simply enter:
+Lastly, these programs can be chained. This may be helpful if you have brand new crops (ie. 1/1/1 spruce saplings) and want them to immediately start spreading once they are fully statted-up. Note that keepMutations in the config should probably be set to false (default), otherwise the storage farm will be overwritten once autoSpread begins.
 
     autoStat && autoSpread
 
 Changing anything in the config requires you to restart your robot.
+
+# Troubleshooting
+1) The Transvector Dislocator is randomly moved to somewhere on the working farm
+
+_Solution: Cover your water sources. Otherwise the order of the transvector binder will get messed up and teleport the dislocator instead of a crop._
+
+4) The Robot is randomly moved to somewhere on the working farm
+
+_Solution: Check the orientation of the transvector dislocator. This can only happen if the dislocator is facing up instead of forward._
+
+3) The Robot is destroying all of the crops that were manually placed
+
+_Solution: Either the resistance or growth stats of the parent crops are too high. By default, anything above 2 resistance or 21 growth is treated like a weed and will be removed. These values, including the maximum stats of child crops, are all easily changed in the config._
+
+4) Crops are randomly dying OR the farms are being overrun with weeds OR there are single crop sticks where there should be double
+
+_Solution: Possibly change location. Crops have minimum environmental stat requirements (nutrients, humidity, air quality) and going below this threshold will kill the crop and leave an empty crop stick behind that is susceptible to growing weeds and overtaking the farms._
 
 ## Other Helpful Commands
 
@@ -115,20 +131,20 @@ To view an entire error message regardless of how long it may be, enter
 
 For starters, I recommend statting-up and spreading the following crops because their outputs are useful and not completely overshadowed by bees. Note that every crop has a higher chance of being discovered with specific parent combinations, but it is often easier to discover a crop from crossbreeding at the same tier. For example, diareed apparently has the highest chance of being discovered when the parents are oilberry and bobsyeruncleranks, BUT I recommend just running autoTier with all Tier 12 crops (or autoSpread with keepMutations on in the config). Crops that require a particular block underneath do not need to be fully grown in order to spread. For a full list of crops and their requirements, visit https://gtnh.miraheze.org/wiki/IC2_Crops_List.
 
-- Stickreed for sticky resin and discovering/breeding with other crops
-- Spruce Bonsai for all of your benzene and power needs
-- Black Stonelilly for black granite dust (fluorine, potassium, magnesium, aluminium, silicon)
-- Nether Stonelilly for netherrack dust (coal, sulfur, redstone, gold)
-- Yellow Stonelilly for endstone dust (helium, tungstate, platinum metallic powder)
-- Sugarbeet for sugar (oxygen)
-- Salty root OR Tearstalks for salt (sodium and chlorine)
-- Enderbloom for enderpearls and endereyes
-- Glowing Earth Coral for sunnarium and glowstone (gold and redstone)
-- Rape for seed oil
-- Goldfish plant for fish oil
-- Diareed for diamonds
-- Bobsyeruncleranks for emeralds
-- Transformium for UU-Matter
+- **Stickreed** for sticky resin and discovering/breeding with other crops
+- **Spruce Bonsai** for all of your benzene and power needs
+- **Black Stonelilly** for black granite dust (fluorine, potassium, magnesium, aluminium, silicon)
+- **Nether Stonelilly** for netherrack dust (coal, sulfur, redstone, gold)
+- **Yellow Stonelilly** for endstone dust (helium, tungstate, platinum metallic powder)
+- **Sugarbeet** for sugar (oxygen)
+- **Salty root** OR **Tearstalks** for salt (sodium and chlorine)
+- **Enderbloom** for enderpearls and endereyes
+- **Glowing Earth Coral** for sunnarium and glowstone (gold and redstone)
+- **Rape** for seed oil
+- **Goldfish Plant** for fish oil
+- **Diareed** for diamonds
+- **Bobsyeruncleranks** for emeralds
+- **Transformium** for UU-Matter
 
 ## Thanks
 
