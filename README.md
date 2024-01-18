@@ -108,26 +108,6 @@ _Solution: Either the resistance or growth stats of the parent crops are too hig
 
 _Solution: Possibly change location. Crops have minimum environmental stat requirements (nutrients, humidity, air quality) and going below this threshold will kill the crop and leave an empty crop stick behind that is susceptible to growing weeds and overtaking the farms._
 
-## Other Helpful Commands
-
-To list all of the files installed on the robot, enter
-
-    ls
-
-To remove any one file installed on the robot, enter
-
-    rm <filename>
-
-To uninstall all of the files from this repo, enter
-
-    uninstall
-
-To view an entire error message regardless of how long it may be, enter
-
-    <program> 2>/errors.log
-
-    edit /errors.log
-
 ## Recommended Crops
 
 For starters, I recommend statting-up and spreading the following crops because their outputs are useful and not completely overshadowed by bees. Note that every crop has a higher chance of being discovered with specific parent combinations, but it is often easier to discover a crop from crossbreeding at the same tier. For example, diareed apparently has the highest chance of being discovered when the parents are oilberry and bobsyeruncleranks, BUT I recommend just running autoTier with all Tier 12 crops (or autoSpread with keepMutations on in the config). Crops that require a particular block underneath do not need to be fully grown in order to spread. For a full list of crops and their requirements, visit https://gtnh.miraheze.org/wiki/IC2_Crops_List.
@@ -147,8 +127,24 @@ For starters, I recommend statting-up and spreading the following crops because 
 - **Bobsyeruncleranks** for emeralds
 - **Transformium** for UU-Matter
 
-## Thanks
+## Other Helpful Commands
 
-My repo is a fork from https://github.com/huchenlei/auto-crossbreeding/tree/improve_autocrossbreed which was originally authored by huchenlei and improved by xyqyear. Huge props to them for getting this off the ground and allowing me to take it further.
+To list all of the files installed on the robot, enter
+
+    ls
+
+To remove any one file installed on the robot, enter
+
+    rm <filename>
+
+To uninstall all of the files from this repo, enter
+
+    uninstall
+
+To view an entire error message regardless of how long it may be, enter
+
+    <program> 2>/errors.log
+
+    edit /errors.log
 
 ![Giant Sword](media/Giant_Sword.png?)
