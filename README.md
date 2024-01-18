@@ -58,7 +58,7 @@ You may change both the size of the working farm and the size of the storage far
 
 ![Farm Side](media/Farm_Side.png?)
 
-First note the orientation of the robot sitting atop the OC charger. It must face towards the right-most column of the working farm. The crop stick chest directly next to the charger can be a few things: any sort of chest, a JABBA barrel, or storage drawer (orientation does not matter). If the crop stick chest is ever empty, bad things will happen. Next to that is a trash can to delete any random drops that the robot picks up (weeds, seed bags, crop sticks, etc), but this can be swapped with a second chest if you would like to recycle some of the materials. The transvector dislocator sits facing the top of the blank farmland (where a crop would go). Think of this as a buffer between the working and storage farms. You can tell which direction the transvector dislocator is facing by the side that is animated. The last spot is for a crop-matron which is optional and one y-level lower than the rest of the blocks. It is just to hydrate most of the crops to help them grow a little faster.
+First note the orientation of the robot sitting atop the OC charger. It must face towards the right-most column of the working farm. Adjacent to the OC charger is the crop stick chest which can be a few things: any sort of large chest, a JABBA barrel, or storage drawer (orientation does not matter). If the crop stick chest is ever empty, bad things will happen. Next to that is a trash can for any random drops that the robot picks up such as weeds, seed bags, and crop sticks but this can be swapped with another chest to recycle some of the materials. The transvector dislocator sits facing the top of the blank farmland (where a crop would go). Think of this as a buffer between the working and storage farms. You can tell which direction the transvector dislocator is facing by the side that is animated. The last spot is for a crop-matron which is optional and one y-level lower than the rest of the blocks. It is just to hydrate most of the crops to help them grow a little faster.
 
 The location of the water is completely flexible: they do not have to be in the same locations as in the photo (underneath all five sea lantern slabs) and you can have as many as you would like on both the working farm and storage farm. However, **there MUST be a block on top of each water** and no two can be next to each other. The block can be literally anything, even a lily pad will work, so long as there is something. It is also possible to use garden soil or fertilized dirt and have absolutely no water on the farms at all, but this will sacrifice a few nutrient stats and bar you from growing crops that require a particular block underneath.
 
@@ -72,19 +72,19 @@ For power, I am using an HV gas turbine and a super tank with some benzene (no t
 
 # Running the Programs
 
-The first program **autoTier** will automatically tier-up your crops until the max breeding round is reached (configurable), the storage farm is full, or ALL crops meet the specified tier threshold (default is 13). Note that unrecognized crops will be moved to the storage farm first before replacing any of the lower tier crops in the working farm. Statting-up crops during this program is also a configurable option, but it will slow down the process significantly. To run, simply enter:
+The first program **autoTier** will automatically tier-up your crops until the max breeding round is reached (configurable), the storage farm is full, or ALL crops meet the specified tier threshold which defaults to 13. Note that unrecognized crops will be moved to the storage farm first before replacing any of the lower tier crops in the working farm. Statting-up crops during this program is also a configurable option, but that will slow down the process significantly. To run, simply enter:
 
     autoTier
 
-The second program **autoStat** will automatically stat-up your target crop until the Gr + Ga - Re is at least 52 (configurable) for ALL crops on the working farm. Note that the maximum growth and resistance stats for parent crops are also configurable parameters (default is 21 and 2, respectively). Any crops with stats higher than these will be interpreted as weeds and removed. To run, simply enter:
+The second program **autoStat** will automatically stat-up your target crop until the Gr + Ga - Re is at least 52 (configurable) for ALL crops on the working farm. Note that the maximum growth and resistance stats for parent crops are also configurable parameters which default to 21 and 2, respectively. Any crops with stats higher than these will be interpreted as weeds and removed. To run, simply enter:
 
     autoStat
 
-The third program **autoSpread** will automatically spread (duplicate) your target crop until the storage farm is full. New crops will only be accepted if their Gr + Ga - Re is at least 50 (configurable). Note that the maximum growth and resistance stats for child crops are also configurable parameters (default is 23 and 2, respectively). To run, simply enter:
+The third program **autoSpread** will automatically spread (duplicate) your target crop until the storage farm is full. New crops will only be moved to the storage farm if their Gr + Ga - Re is at least 50 (configurable). Note that the maximum growth and resistance stats for child crops are also configurable parameters which default to 23 and 2, respectively. To run, simply enter:
 
     autoSpread
 
-Lastly, these programs can be chained. This may be helpful if you have brand new crops (ie. 1/1/1 spruce saplings) and want them to immediately start spreading once they are fully statted-up. Note that keepMutations in the config should probably be set to false (default), otherwise the storage farm will be overwritten once autoSpread begins.
+Lastly, these programs can be chained together which may be helpful if you have brand new crops (ie. 1/1/1 spruce saplings) and want them to immediately start spreading once they are fully statted-up. Note that keepMutations in the config should probably be set to false (default) otherwise the storage farm will be overwritten once the second program begins. To run autoSpread after autoStat, simply enter:
 
     autoStat && autoSpread
 
