@@ -2,6 +2,7 @@ local gps = require('gps')
 local posUtil = require('posUtil')
 local scanner = require('scanner')
 local config = require('config')
+local notifications = require('notifications')
 local storage = {}
 local reverseStorage = {}
 local farm = {}
@@ -41,6 +42,8 @@ end
 local function addToStorage(crop)
     storage[#storage+1] = crop
     reverseStorage[crop.name] = #storage
+
+    notifications.sendNotification("New crop discovered", "Discovered crop: " .. crop.name)
 end
 
 

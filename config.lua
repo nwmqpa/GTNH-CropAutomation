@@ -36,6 +36,12 @@ local config = {
     -- Max breed round before termination of autoTier.
     maxBreedRound = 1000,
 
+    -- Wether ntfy.sh notifications should be enabled
+    ntfyEnabled = false,
+
+    -- The ntfy.sh channel to send notifications to
+    ntfyChannel = "invalid",
+
     -- =========== DO NOT CHANGE ===========
 
     -- The coordinate for charger

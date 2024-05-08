@@ -4,6 +4,7 @@ local database = require('database')
 local scanner = require('scanner')
 local posUtil = require('posUtil')
 local config = require('config')
+local notifications = require('notifications')
 local breedRound = 0
 local lowestTier
 local lowestTierSlot
@@ -119,19 +120,19 @@ local function tierOnce()
 
         -- Terminal Condition
         if breedRound > config.maxBreedRound then
-            print('autoTier: Max Breeding Round Reached!')
+            notifications.sendNotification('autoTier: Max Breeding Round Reached!', 'autoTier: Max Breeding Round Reached!')
             return false
         end
 
         -- Terminal Condition
         if #database.getStorage() >= config.storageFarmArea then
-            print('autoTier: Storage Full!')
+            notifications.sendNotification('autoTier: Storage Full!', 'autoTier: Storage Full!')
             return false
         end
 
         -- Terminal Condition
         if lowestTier >= config.autoTierThreshold then
-            print('autoTier: Minimum Tier Threshold Reached!')
+            notifications.sendNotification('autoTier: Minimum Tier Threshold Reached!', 'autoTier: Minimum Tier Threshold Reached!')
             return false
         end
 
@@ -160,7 +161,7 @@ local function init()
     action.restockAll()
     updateLowest()
 
-    print(string.format('autoTier: Target Tier %s', config.autoTierThreshold))
+    notifications.sendNotification("autoTier starting up", string.format('Target Tier %s', config.autoTierThreshold))
 end
 
 
@@ -178,7 +179,7 @@ local function main()
         action.cleanUp()
     end
 
-    print('autoTier: Complete!')
+    notifications.sendNotification('autoTier: Complete!', 'autoTier: Complete!')
 end
 
 main()
