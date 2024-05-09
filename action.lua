@@ -218,7 +218,7 @@ local function movePlantFarmGlacier(src, dest)
     robot.select(robot.inventorySize()+config.binderSlot)
     inventory_controller.equip()
 
-    if src[1] < 0 then
+    if src[1] > 0 then
         -- From Glacier to Farm
 
         -- TRANSFER TO GLACIER RELAY LOCATION

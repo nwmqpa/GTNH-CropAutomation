@@ -36,7 +36,7 @@ local function main()
 
     startingCrop = database.getFarm()[1].name
 
-    if startingCrop ~= crop then
+    if startingCrop ~= crop and startingCrop ~= "air" then
         print("Starting crop is not the same as the target crop. Aborting")
         return
     end
