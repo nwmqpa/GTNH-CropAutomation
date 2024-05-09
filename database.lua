@@ -13,6 +13,9 @@ local function getFarm()
     return farm
 end
 
+local function resetFarm()
+    farm = {}
+end
 
 local function updateFarm(slot, crop)
     farm[slot] = crop
@@ -27,6 +30,24 @@ local function scanFarm()
     end
 end
 
+local function scanAllFarm()
+    for slot=1, config.workingFarmArea do
+        gps.go(posUtil.workingSlotToPos(slot))
+        local crop = scanner.scan()
+        farm[slot] = crop
+    end
+end
+
+local function findNextFilledFarmSlot()
+    for slot=1, config.workingFarmArea, 1 do
+        crop = farm[slot]
+        if crop.name ~= "air" then
+            return slot
+        end
+    end
+    return -1
+end
+
 -- ======================== STORAGE FARM ========================
 
 local function getStorage()
@@ -38,6 +59,9 @@ local function resetStorage()
     storage = {}
 end
 
+local function updateStorage(slot, crop)
+    storage[slot] = crop
+end
 
 local function addToStorage(crop)
     storage[#storage+1] = crop
@@ -60,6 +84,23 @@ local function nextStorageSlot()
     return #storage + 1
 end
 
+local function scanStorage()
+    for slot=1, config.storageFarmArea, 1 do
+        gps.go(posUtil.storageSlotToPos(slot))
+        local crop = scanner.scan()
+        storage[slot] = crop
+    end
+end
+
+local function findNextEmptyStorageSlot()
+    for slot=1, config.storageFarmArea, 1 do
+        crop = storage[slot]
+        if crop.name == "air" then
+            return slot
+        end
+    end
+    return -1
+end
 
 return {
     getFarm = getFarm,
@@ -69,5 +110,11 @@ return {
     resetStorage = resetStorage,
     addToStorage = addToStorage,
     existInStorage = existInStorage,
-    nextStorageSlot = nextStorageSlot
+    nextStorageSlot = nextStorageSlot,
+    scanAllFarm = scanAllFarm,
+    scanStorage = scanStorage,
+    findNextFilledFarmSlot = findNextFilledFarmSlot,
+    findNextEmptyStorageSlot = findNextEmptyStorageSlot,
+    resetFarm = resetFarm,
+    updateStorage = updateStorage
 }

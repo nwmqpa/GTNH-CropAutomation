@@ -12,7 +12,6 @@ local scripts = {
     'autoStat.lua',
     'autoTier.lua',
     'autoSpread.lua',
-    'config.lua',
     'uninstall.lua',
     'notifications.lua',
 }
@@ -35,3 +34,5 @@ end
 for i=1, #scripts do
     shell.execute(string.format('wget -f %s%s/%s', repo, branch, scripts[i]))
 end
+
+shell.execute(string.format('wget %s%s/%s', repo, branch, 'config.lua'))

@@ -162,6 +162,30 @@ local function transplant(src, dest)
     robot.select(selectedSlot)
 end
 
+local function movePlant(src, dest)
+    local selectedSlot = robot.select()
+    gps.save()
+    robot.select(robot.inventorySize()+config.binderSlot)
+    inventory_controller.equip()
+
+    -- TRANSFER TO RELAY LOCATION
+    gps.go(config.dislocatorPos)
+    robot.useDown(sides.down)
+    gps.go(src)
+    robot.useDown(sides.down, true)
+    gps.go(config.dislocatorPos)
+    signal.pulseDown()
+
+    -- TRANSFER CROP TO DESTINATION
+    robot.useDown(sides.down, true)
+    gps.go(dest)
+    robot.useDown(sides.down, true)
+    gps.go(config.dislocatorPos)
+    signal.pulseDown()
+
+    inventory_controller.equip()
+    robot.select(selectedSlot)
+end
 
 local function cleanUp()
     for slot=1, config.workingFarmArea, 1 do
@@ -199,5 +223,6 @@ return {
     placeCropStick = placeCropStick,
     deweed = deweed,
     transplant = transplant,
-    cleanUp = cleanUp
+    cleanUp = cleanUp,
+    movePlant = movePlant,
 }
