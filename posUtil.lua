@@ -62,7 +62,7 @@ local function slotToIJ(slot, maxSide)
     local i = slot % maxSide
     local j = slot // maxSide
 
-    retunr {i, j}
+    return {i, j}
 end
 
 
