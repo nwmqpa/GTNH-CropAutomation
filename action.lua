@@ -314,5 +314,6 @@ return {
     transplant = transplant,
     cleanUp = cleanUp,
     movePlant = movePlant,
-    movePlantToGlacier = movePlantToGlacier
+    movePlantToGlacier = movePlantToGlacier,
+    movePlantFarmGlacier = movePlantFarmGlacier
 }
