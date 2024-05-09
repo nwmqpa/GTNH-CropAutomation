@@ -103,6 +103,16 @@ local function findNextEmptyStorageSlot()
     return -1
 end
 
+local function findNextFilledStorageSlot()
+    for slot=1, config.storageFarmArea, 1 do
+        crop = storage[slot]
+        if crop.name ~= "air" then
+            return slot
+        end
+    end
+    return -1
+end
+
 -- ======================== GLACIER FARM ========================
 
 local function getGlacier()
@@ -150,6 +160,7 @@ return {
     scanStorage = scanStorage,
     findNextFilledFarmSlot = findNextFilledFarmSlot,
     findNextEmptyStorageSlot = findNextEmptyStorageSlot,
+    findNextFilledStorageSlot = findNextFilledStorageSlot,
     resetFarm = resetFarm,
     updateStorage = updateStorage,
     getGlacier = getGlacier,

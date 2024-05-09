@@ -187,6 +187,31 @@ local function movePlant(src, dest)
     robot.select(selectedSlot)
 end
 
+local function movePlantToGlacier(src, dest)
+    local selectedSlot = robot.select()
+    gps.save()
+    robot.select(robot.inventorySize()+config.binderSlot)
+    inventory_controller.equip()
+
+    -- TRANSFER TO RELAY LOCATION
+    gps.go(config.glacierDislocatorPos)
+    robot.useDown(sides.down)
+    gps.go(src)
+    robot.useDown(sides.down, true)
+    gps.go(config.glacierDislocatorPos)
+    signal.pulseDown()
+
+    -- TRANSFER CROP TO DESTINATION
+    robot.useDown(sides.down, true)
+    gps.go(dest)
+    robot.useDown(sides.down, true)
+    gps.go(config.glacierDislocatorPos)
+    signal.pulseDown()
+
+    inventory_controller.equip()
+    robot.select(selectedSlot)
+end
+
 local function cleanUp()
     for slot=1, config.workingFarmArea, 1 do
 

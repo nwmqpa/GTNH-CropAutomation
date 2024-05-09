@@ -14,7 +14,8 @@ local scripts = {
     'autoSpread.lua',
     'uninstall.lua',
     'notifications.lua',
-    'toStorage.lua'
+    'toStorage.lua',
+    'toGlacier.lua',
 }
 
 -- BRANCH
