@@ -34,7 +34,7 @@ local function main()
         action.charge()
 
         -- Update database
-        database.updateGlacier(glacierSlot, database.getStorage()[workingSlot])
+        database.updateGlacier(glacierSlot, database.getStorage()[storageSlot])
         database.updateStorage(storageSlot, { isCrop = true, name = "air" })
 
         -- Find next plant to transplant
