@@ -16,6 +16,7 @@ local scripts = {
     'notifications.lua',
     'toStorage.lua',
     'toGlacier.lua',
+    'prepareWorking.lua',
 }
 
 -- BRANCH

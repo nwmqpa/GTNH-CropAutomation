@@ -8,6 +8,29 @@ local reverseStorage = {}
 local farm = {}
 local glacier = {}
 
+local reverseAll = {}
+
+
+local function storeReverse(cropName, pos, isInStorage, slot)
+    if reverseAll[cropName] == nil then
+        reverseAll[cropName] = {}
+    end
+    
+    table.insert(reverseAll[cropName], { pos = pos, inStorage = isInStorage, slot = slot})
+end
+
+local function clearReverseTable()
+    reverseAll = {}
+end
+
+local function clearReverseTableCrop(cropName)
+    reverseAll[cropName] = {}
+end
+
+local function findAllCrop(cropName)
+    return reverseAll[cropName]
+end
+
 -- ======================== WORKING FARM ========================
 
 local function getFarm()
@@ -42,7 +65,17 @@ end
 local function findNextFilledFarmSlot()
     for slot=1, config.workingFarmArea, 1 do
         local crop = farm[slot]
-        if crop.name ~= "air" then
+        if crop.name ~= "air" and crop.name ~= "block" then
+            return slot
+        end
+    end
+    return -1
+end
+
+local function findNextEmptyFarmSlot()
+    for slit=1, config.workingFarmArea, 2 do
+        local crop = farm[slot]
+        if crop.name == "air" then
             return slot
         end
     end
@@ -90,6 +123,9 @@ local function scanStorage()
         gps.go(posUtil.storageSlotToPos(slot))
         local crop = scanner.scan()
         storage[slot] = crop
+        if crop.name ~= "air" and crop.name ~= "block" then
+            storeReverse(crop.name, posUtil.storageSlotToPos(slot), true, slot)
+        end
     end
 end
 
@@ -106,7 +142,7 @@ end
 local function findNextFilledStorageSlot()
     for slot=1, config.storageFarmArea, 1 do
         local crop = storage[slot]
-        if crop.name ~= "air" then
+        if crop.name ~= "air" and crop.name ~= "block" then
             return slot
         end
     end
@@ -133,6 +169,9 @@ local function scanGlacier()
         gps.go(posUtil.glacierSlotToPos(slot))
         local crop = scanner.scan()
         updateGlacier(slot, crop)
+        if crop.name ~= "air" and crop.name ~= "block" then
+            storeReverse(crop.name, posUtil.glacierSlotToPos(slot), false, slot)
+        end
     end
 end
 
@@ -158,6 +197,7 @@ return {
     nextStorageSlot = nextStorageSlot,
     scanAllFarm = scanAllFarm,
     scanStorage = scanStorage,
+    findNextEmptyFarmSlot = findNextEmptyFarmSlot,
     findNextFilledFarmSlot = findNextFilledFarmSlot,
     findNextEmptyStorageSlot = findNextEmptyStorageSlot,
     findNextFilledStorageSlot = findNextFilledStorageSlot,
@@ -168,4 +208,7 @@ return {
     updateGlacier = updateGlacier,
     scanGlacier = scanGlacier,
     findNextEmptyGlacierSlot = findNextEmptyGlacierSlot,
+    findAllCrop = findAllCrop,
+    clearReverseTable = clearReverseTable,
+    clearReverseTableCrop = clearReverseTableCrop
 }

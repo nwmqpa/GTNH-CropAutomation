@@ -212,6 +212,70 @@ local function movePlantToGlacier(src, dest)
     robot.select(selectedSlot)
 end
 
+local movePlantFarmGlacier(src, dest)
+    local selectedSlot = robot.select()
+    gps.save()
+    robot.select(robot.inventorySize()+config.binderSlot)
+    inventory_controller.equip()
+
+    if src[1] < 0 then
+        -- From Glacier to Farm
+
+        -- TRANSFER TO GLACIER RELAY LOCATION
+        gps.go(config.glacierDislocatorPos)
+        robot.useDown(sides.down)
+        gps.go(src)
+        robot.useDown(sides.down, true)
+        gps.go(config.glacierDislocatorPos)
+        signal.pulseDown()
+
+        -- TRANSFER CROP TO STORAGE RELAY
+        gps.go(config.dislocatorPos)
+        robot.useDown(sides.down, true)
+        -- Farmland in front of dislocator
+        gps.go({ config.glacierDislocatorPos[1] - 1, config.glacierDislocatorPos[2] })
+        robot.useDown(sides.down, true)
+        gps.go(config.dislocatorPos)
+        signal.pulseDown()
+
+        -- TRANSFER CROP TO DESTINATION
+        robot.useDown(sides.down, true)
+        gps.go(dest)
+        robot.useDown(sides.down, true)
+        gps.go(config.dislocatorPos)
+        signal.pulseDown()
+    else
+        -- From Farm to Glacier
+
+        -- TRANSFER TO STORAGE RELAY LOCATION
+        gps.go(config.dislocatorPos)
+        robot.useDown(sides.down)
+        gps.go(src)
+        robot.useDown(sides.down, true)
+        gps.go(config.dislocatorPos)
+        signal.pulseDown()
+
+        -- TRANSFER CROP TO GLACIER RELAY
+        gps.go(config.glacierDislocatorPos)
+        robot.useDown(sides.down, true)
+        -- Farmland in front of dislocator
+        gps.go({ config.dislocatorPos[1], config.dislocatorPos[2] - 1 })
+        robot.useDown(sides.down, true)
+        gps.go(config.glacierDislocatorPos)
+        signal.pulseDown()
+
+        -- TRANSFER CROP TO DESTINATION
+        robot.useDown(sides.down, true)
+        gps.go(dest)
+        robot.useDown(sides.down, true)
+        gps.go(config.glacierDislocatorPos)
+        signal.pulseDown()
+    end
+
+    inventory_controller.equip()
+    robot.select(selectedSlot)
+end
+
 local function cleanUp()
     for slot=1, config.workingFarmArea, 1 do
 
