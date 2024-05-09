@@ -5,6 +5,8 @@ local config = {
     storageFarmSize = 9,
     -- Side Length of Working Farm
     workingFarmSize = 6,
+    -- Side Length of Glacier Farm
+    glacierFarmSize = 15,
 
     -- Once complete, remove all extra crop sticks to prevent the working farm from weeding
     cleanUp = true,
@@ -65,7 +67,12 @@ local config = {
     storageStopSlot = -3
 }
 
+-- =========== GLACIER ===========
+
+config.glacierDislocatorPos = {3, config.workingFarmSize+1}
+
 config.workingFarmArea = config.workingFarmSize^2
 config.storageFarmArea = config.storageFarmSize^2
+config.glacierFarmArea = config.glacierFarmSize^2
 
 return config

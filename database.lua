@@ -6,6 +6,7 @@ local notifications = require('notifications')
 local storage = {}
 local reverseStorage = {}
 local farm = {}
+local glacier = {}
 
 -- ======================== WORKING FARM ========================
 
@@ -102,6 +103,40 @@ local function findNextEmptyStorageSlot()
     return -1
 end
 
+-- ======================== GLACIER FARM ========================
+
+local function getGlacier()
+    return glacier
+end
+
+
+local function resetGlacier()
+    glacier = {}
+end
+
+local function updateGlacier(slot, crop)
+    glacier[slot] = crop
+end
+
+local function scanGlacier()
+    for slot=1, config.glacierFarmArea, 1 do
+        gps.go(posUtil.glacierSlotToPos(slot))
+        local crop = scanner.scan()
+        updateGlacier(slot, crop)
+    end
+end
+
+local function findNextEmptyGlacierSlot()
+    for slot=1, config.glacierFarmArea, 1 do
+        crop = glacier[slot]
+        if crop.name == "air" then
+            return slot
+        end
+    end
+    return -1
+end
+
+
 return {
     getFarm = getFarm,
     updateFarm = updateFarm,
@@ -116,5 +151,10 @@ return {
     findNextFilledFarmSlot = findNextFilledFarmSlot,
     findNextEmptyStorageSlot = findNextEmptyStorageSlot,
     resetFarm = resetFarm,
-    updateStorage = updateStorage
+    updateStorage = updateStorage,
+    getGlacier = getGlacier,
+    resetGlacier = resetGlacier,
+    updateGlacier = updateGlacier,
+    scanGlacier = scanGlacier,
+    findNextEmptyGlacierSlot = findNextEmptyGlacierSlot,
 }
