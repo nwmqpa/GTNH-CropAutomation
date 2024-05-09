@@ -38,7 +38,7 @@ local function main()
         database.updateStorage(storageSlot, { isCrop = true, name = "air" })
 
         -- Find next plant to transplant
-        workingSlot = database.findNextFilledStorageSlot()
+        storageSlot = database.findNextFilledStorageSlot()
     end
 
     print('toGlacier: Complete!')
