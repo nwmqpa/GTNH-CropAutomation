@@ -212,7 +212,7 @@ local function movePlantToGlacier(src, dest)
     robot.select(selectedSlot)
 end
 
-local movePlantFarmGlacier(src, dest)
+local function movePlantFarmGlacier(src, dest)
     local selectedSlot = robot.select()
     gps.save()
     robot.select(robot.inventorySize()+config.binderSlot)
