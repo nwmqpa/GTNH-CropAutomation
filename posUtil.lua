@@ -98,8 +98,8 @@ end
 local function glacierSlotToPos(slot)
     local ij = slotToIJMorton(slot - 1, config.glacierFarmSize)
 
-    local x = ij[1] + config.glacierDislocatorPos - 1
-    local y = ij[2] + config.glacierDislocatorPos + 1
+    local x = ij[1] + config.glacierDislocatorPos[1] - 1
+    local y = ij[2] + config.glacierDislocatorPos[2] + 1
 
     return {x, y}
 end
