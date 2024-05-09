@@ -41,7 +41,7 @@ end
 
 local function findNextFilledFarmSlot()
     for slot=1, config.workingFarmArea, 1 do
-        crop = farm[slot]
+        local crop = farm[slot]
         if crop.name ~= "air" then
             return slot
         end
@@ -95,7 +95,7 @@ end
 
 local function findNextEmptyStorageSlot()
     for slot=1, config.storageFarmArea, 1 do
-        crop = storage[slot]
+        local crop = storage[slot]
         if crop.name == "air" then
             return slot
         end
@@ -105,7 +105,7 @@ end
 
 local function findNextFilledStorageSlot()
     for slot=1, config.storageFarmArea, 1 do
-        crop = storage[slot]
+        local crop = storage[slot]
         if crop.name ~= "air" then
             return slot
         end
@@ -138,7 +138,7 @@ end
 
 local function findNextEmptyGlacierSlot()
     for slot=1, config.glacierFarmArea, 1 do
-        crop = glacier[slot]
+        local crop = glacier[slot]
         if crop.name == "air" then
             return slot
         end
